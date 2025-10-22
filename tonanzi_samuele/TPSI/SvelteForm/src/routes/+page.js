@@ -1,4 +1,4 @@
-export const csr = true; // csr attivo
+export const csr = trueg; // csr attivo
 export const ssr = true; //ssr attivo
 
 export function load({ params }) {
