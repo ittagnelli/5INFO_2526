@@ -1,17 +1,35 @@
 
 <script>
-    export let data; // riceve i dati forniti dal backend durante il load della pagina
+    export let data; 
+    export let form;
+    let nome, cognome, eta;
+    let error = false;
+    if(form?.form_error){
+        error=true;
+        nome = form.form_vals.nome;
+        cognome = form.form_vals.cognome;
+        eta = form.form_vals.eta;
+    }
 </script>
 
 <h1>Welcome to SvelteKit FORM Example</h1>
 
 <form method="POST">
     <div><label for="nome">Nome</label></div>
-    <div><input type="text" name="nome" id="nome" siz="48"></div>
+    <div>
+    <input type="text" name="nome" id="nome" size="48" bind:value={nome}>
+    <p class={error && nome?.length ==0? "": "hidden"}>Nome Invalido</p>
+    </div>
     <div><label for="cognome">Cognome</label></div>
-    <div><input type="text" name="cognome" id="cognome" siz="48"></div>
+    <div>
+    <input type="text" name="cognome" id="cognome" size="48" bind:value={cognome}>
+    <p class={error && cognome?.length == 0? "" : "hidden" }>Cognome Invalido</p>
+    </div>
     <div><label for="eta">Eta</label></div>
-    <div><input type="number" name="eta" id="eta" min="15"></div>
+    <div>
+    <input type="number" name="eta" id="eta" min="15" bind:value={eta}>
+    <p class={error && eta?.length == 0? "" : "hidden" }>Età invalida</p>
+    </div>
     <div><input type="submit"></div>
 </form>
 
@@ -32,7 +50,16 @@
         height: 25px;
         border-radius: 6px;
     }
+    
     label{
         line-height: 25px;
+    }
+    p{
+        color:red;
+        font-weight: bold;
+    }
+
+    .hidden{
+        display: none;
     }
 </style>
