@@ -12,7 +12,9 @@
     }
 </script>
 
-<h1>Welcome to SvelteKit FORM Example</h1>
+<div class="container">
+    <h1>Welcome to SvelteKit FORM Example</h1>
+</div>
 
 <form method="POST">
     <div><label for="nome">Nome</label></div>
@@ -27,14 +29,68 @@
     <div><input type="submit"></div>
 </form>
 
-<ul>
-    <!-- Visualizza una lista di utenti ricevuti dal back end-->
-    {#each data.utenti as utente}
-        <li>{utente}</li>
-    {/each}
-</ul>
+<table>
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Nome</td>
+            <td>Cognome</td>
+            <td>Eta</td>
+            <td>Edit</td>
+            <td>Remove</td>
+        </tr>
+    </thead>
+    <tbody>
+        {#each data.utenti as utente}
+            <tr>
+                <td>#?</td>
+                <td>{utente.nome}</td>
+                <td>{utente.cognome}</td>
+                <td>{utente.eta}</td>
+                <td>
+                    <button class="edit">Edit</button>
+                </td>
+                <td>
+                    <button class="remove">Remove</button>
+                </td>
+            </tr>
+        {/each}
+    </tbody>
+</table>
 
 <style>
+    .container {
+        width: 45%;
+        margin: auto;
+    }
+
+    table, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 10px;
+        margin-top: 50px;
+    }
+
+    thead {
+        font-size: 20px;
+        font-weight: bolder;
+    }
+
+    .edit, .remove {
+        color: white;
+        background-color: green;
+        border-color: green;
+        border-radius: 5px;
+        width: 100px;
+        height: 30px;
+        font-weight: bolder;
+    }
+
+    .remove {
+        background-color: red;
+        border-color: red;
+    }
+
     form {
         width: 50%;
         display: grid;
