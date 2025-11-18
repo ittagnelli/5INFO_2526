@@ -14,7 +14,7 @@
 <div class="container">
     <h1>Welcome to SvelteKit FORM Example</h1>
 
-    <form method="POST">
+    <form method="POST" action='?/create'>
         <div><label for="nome">Nome</label></div>
         <div>
             <input type="text" id="nome" name="nome" size="40" bind:value={nome}/>
