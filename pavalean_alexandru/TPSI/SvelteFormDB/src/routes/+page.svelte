@@ -1,7 +1,8 @@
 <script>
     export let data;
     export let form;
-    let nome, cognome, eta;
+    let id, nome, cognome, eta;
+    let action = 'create';
     let error = false;
 
     if(form?.form_error) {
@@ -10,11 +11,22 @@
         cognome = form.form_vals.cognome;
         eta = form.form_vals.eta;
     }
+
+    function edit_user(user){
+        action = 'update';
+        id = user.id;
+        nome = user.nome;
+        cognome = user.cognome;
+        eta = user.eta;
+    }
 </script>
 
 
 <div class="container">
-    <form method="POST">
+    <form method="POST" action="?/{action}">
+        {#if action == 'update'}
+            <input type="hidden" name="id" bind:value={id}/>
+        {/if}
         <div><label for="nome">Nome</label></div>
         <div>
             <input type="text" id="nome" name="nome" size="40" bind:value={nome}/>
@@ -52,10 +64,13 @@
                 <td>{utente.cognome}</td>
                 <td>{utente.eta}</td>
                 <td>
-                    <button class="edit">Edit</button>
+                    <button class="edit" on:click={() => edit_user(utente)}>Edit</button>
                 </td>
                 <td>
-                    <button class="remove">Remove</button>
+                    <form method="POST" action="?/delete">
+                        <input type="hidden" name="id" value={utente.id}>
+                        <button class="remove">Remove</button>
+                    </form>
                 </td>
             </tr>
             {/each}
