@@ -72,7 +72,10 @@
                         <button class="edit" on:click={() => edit_user(utente)}>Edit</button>
                     </td>
                     <td>
-                        <button class="remove">Remove</button>
+                        <form action="?/delete" method="POST">
+                            <input type="hidden" name="id" value={utente.id} />
+                            <button class="remove">Remove</button>
+                        </form>
                     </td>
                 </tr>
             {/each}
