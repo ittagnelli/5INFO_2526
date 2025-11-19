@@ -30,17 +30,23 @@
         <div><label for="nome">Nome</label></div>
         <div>
             <input type="text" id="nome" name="nome" size="40" bind:value={nome}/>
-            <p class={error && nome?.length == 0? '' : 'hidden'}>Nome invalido</p>
+            <br>
+            <br>
+            <!-- <p class={error && nome.length == 0 ? '' : 'hidden'}>Nome invalido</p> -->
         </div>
         <div><label for="cognome">Cognome</label></div>
         <div>
             <input type="text" id="cognome" name="cognome" size="40" bind:value={cognome}/>
-            <p class={error && cognome?.length == 0? '': 'hidden'}>Cognome invalido</p>
+            <br>
+            <br>
+            <!-- <p class={error && cognome.length == 0? '': 'hidden'}>Cognome invalido</p> -->
         </div>
         <div><label for="eta">Età</label></div>
         <div>
             <input type="number" id="eta" name="eta" min="15" bind:value={eta}/>
-            <p class={error && eta?.length == 0? '': 'hidden'}>Età invalida</p>
+            <br>
+            <br>
+            <!-- <p class={error && eta?.length == 0? '': 'hidden'}>Età invalida</p> -->
         </div>
         <div><input type="submit"></div>
     </form>
