@@ -1,30 +1,38 @@
-let utenti = [
-    {nome: 'Mario', cognome: 'Rossi', eta: 25},
-    {nome: 'Luca', cognome: 'Bianchi', eta: 15},
-    {nome: 'Gianni', cognome: 'Verdi', eta: 19},
-    {nome: 'Pino', cognome: 'Silverstre', eta: 27}
-];
 
-export function load({ params }){
-    console.log("ESECUZIONE FUNZIONE LOAD", Date.now());
+import Database from "better-sqlite3";
+const db = new Database("USER.db", {verbose: console.log});
+export function load({params}){
+    console.log("ESECUZIONE FUNZIONE LOAD:", Date.now());
 
-    return {
-        utenti
-    }
+    const query1 = db.prepare("SELECT * FROM Utente");
+    const res1 = query1.all();
+
+    return{
+        utenti:res1,
+    };
 }
 
 export const actions = {
-    default: async ({cookies, request}) => {
+    create: async ({cookies, request}) => {
         const data = await request.formData();
+        console.log("CREATE ACTION");
         console.log("I VALORI DEL FORM SONO:", data);
         
+        const query2 = db.prepare("INSERT INTO Utente (Nome, Cognome, eta) Values(@nome, @cognome, @anni)");
+
+        
+
         const user = {
             nome: data.get('nome'),
             cognome: data.get('cognome'),
             eta: data.get('eta')
         }
         if (user.nome && user.cognome && user.eta) {
-            utenti.push(user);
+            const res2 = query2.run({
+                nome:user.nome,
+                cognome:user.cognome,
+                anni:+user.eta
+            })
         } else {
             return {
                 form_error: true,
@@ -32,4 +40,45 @@ export const actions = {
             }
         }
     },
+
+    update: async ({cookies, request}) => {
+        const data = await request.formData();
+        console.log("UPDATE ACTION");
+        console.log("I VALORI DEL FORM SONO:", data);
+        
+        const query3 = db.prepare("UPDATE Utente SET Nome=@nome, Cognome=@cognome, eta=@anni WHERE id=@id");
+
+        console.log(data)
+
+        const user = {
+            id: data.get("id"),
+            nome: data.get('nome'),
+            cognome: data.get('cognome'),
+            eta: data.get('eta')
+        }
+        if (user.nome && user.cognome && user.eta) {
+            const res3 = query3.run({
+                id: +user.id,
+                nome: user.nome,
+                cognome: user.cognome,
+                anni: +user.eta
+            })
+        } else {
+            return {
+                form_error: true,
+                form_vals: user
+            }
+        }
+    },
+    delete: async ({cookies, request})=> {
+        const data = await request.formData();
+        console.log("DELETE ACTION");
+        console.log("I VALORI DEL FORM SONO: ", data);
+
+        const query4 = db.prepare(
+            "DELETE FROM Utente WHERE id = ?"
+        );
+        const res4 = query4.run(+data.get("id"));
+    }
 };
+
