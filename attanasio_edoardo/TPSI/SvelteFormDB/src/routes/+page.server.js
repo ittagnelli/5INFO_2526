@@ -45,7 +45,7 @@ export const actions = {
             const res2 = query2.run({
                 nome: user.nome,
                 cognome: user.cognome,
-                anni : user.eta
+                anni : +user.eta
             });
          } else {
              return {
@@ -73,10 +73,10 @@ export const actions = {
 
         if (user.nome && user.cognome && user.eta) {
             const res3 = query3.run({
-                id: user.id,
+                id: +user.id,
                 nome: user.nome,
                 cognome: user.cognome,
-                anni : user.eta
+                anni : +user.eta
             });
          } else {
              return {
@@ -86,6 +86,15 @@ export const actions = {
         }
 
 
+     },
+     delete: async ({ cookies, request}) => {
+        const data = await request.formData();
+        console.log("I VALORI DEL FORM SONO:", data);
+
+        const query4 = db.prepare(
+            "DELETE FROM Utente WHERE id = ?"
+        );
+        const res4 = query4.run(+data.get("id"));
      }
 
  };
