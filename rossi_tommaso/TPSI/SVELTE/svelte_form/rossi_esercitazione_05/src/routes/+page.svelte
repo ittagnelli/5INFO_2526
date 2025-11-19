@@ -69,7 +69,13 @@
                         <button class='edit' on:click={() => edit_user(utente)}>Edit</button>
                     </td>
                     <td>
-                        <button class='remove'>Remove</button>
+                        <form method='POST' action="?/delete" on:submit={(e) => {
+        if (!confirm('Sei sicuro?')) {
+            e.preventDefault()
+        }}}>
+                            <input type="hidden" name="id" value={utente.id}>
+                            <button class='remove'>Remove</button>
+                        </form>
                     </td>
                 </tr>
             {/each}
