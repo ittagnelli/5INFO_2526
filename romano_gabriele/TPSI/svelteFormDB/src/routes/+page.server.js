@@ -3,16 +3,10 @@ import Database from "better-sqlite3";
 const db = new Database("USER.db", {verbose: console.log});
 
 export function load({params}) {
-    let utenti = [
-        'Mario',
-        'Luca',
-        'Gianni',
-        'Pino'
-    ];
-    
     console.log("ESECUZIONE FUNZIONE LOAD:", Date.now());
     const query1 = db.prepare("SELECT * FROM Utente");
     const res1 = query1.all();
+    console.log(res1);
 
     return {
         utenti: res1

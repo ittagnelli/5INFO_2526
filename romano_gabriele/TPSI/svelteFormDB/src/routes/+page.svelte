@@ -43,7 +43,7 @@
     <tbody>
         {#each data.utenti as utente}
             <tr>
-                <td>#?</td>
+                <td>{utente.id}</td>
                 <td>{utente.nome}</td>
                 <td>{utente.cognome}</td>
                 <td>{utente.eta}</td>
