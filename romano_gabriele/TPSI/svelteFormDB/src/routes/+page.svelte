@@ -1,7 +1,8 @@
 <script>
     export let data; // riceve i dati forniti dal backend durante il load della pagina
     export let form;
-    let nome, cognome, eta;
+    let id, nome, cognome, eta;
+    let action = 'create';
     let error = false;
 
     if(form?.form_error) {
@@ -10,53 +11,64 @@
         cognome = form.form_vals.cognome;
         eta = form.form_vals.eta;
     }
+
+    function edit_user(user) {
+        action = 'update';
+        id = user.id;
+        nome = user.nome;
+        cognome = user.cognome;
+        eta = user.eta;
+    }
 </script>
 
 <div class="container">
     <h1>Welcome to SvelteKit FORM Example</h1>
-</div>
 
-<form method="POST">
-    <div><label for="nome">Nome</label></div>
-    <div><input type="text" id="nome" name="nome" size="40" bind:value={nome}></div>
-    <p class={error && nome?.length == 0? '' : 'hidden'}>Nome invalido</p>
-    <div><label for="cognome">Cognome</label></div>
-    <div><input type="text" id="cognome" name="cognome" size="40" bind:value={cognome}></div>
-    <p class={error && cognome?.length == 0? '' : 'hidden'}>Cognome invalido</p>
-    <div><label for="eta">Età</label></div>
-    <div><input type="text" id="eta" name="eta" size="40" bind:value={eta}></div>
-    <p class={error && eta?.length == 0? '' : 'hidden'}>Eta invalido</p>
-    <div><input type="submit"></div>
-</form>
+    <form method="POST" action="?/{action}">
+        {#if action == 'update'}
+            <input type="hidden" name="id" bind:value={id}>
+        {/if}
+        <div><label for="nome">Nome</label></div>
+        <div><input type="text" id="nome" name="nome" size="40" bind:value={nome}></div>
+        <p class={error && nome?.length == 0? '' : 'hidden'}>Nome invalido</p>
+        <div><label for="cognome">Cognome</label></div>
+        <div><input type="text" id="cognome" name="cognome" size="40" bind:value={cognome}></div>
+        <p class={error && cognome?.length == 0? '' : 'hidden'}>Cognome invalido</p>
+        <div><label for="eta">Età</label></div>
+        <div><input type="text" id="eta" name="eta" size="40" bind:value={eta}></div>
+        <p class={error && eta?.length == 0? '' : 'hidden'}>Eta invalido</p>
+        <div><input type="submit"></div>
+    </form>
 
-<table>
-    <thead>
-        <tr>
-            <td>ID</td>
-            <td>Nome</td>
-            <td>Cognome</td>
-            <td>Eta</td>
-            <td>Edit</td>
-            <td>Remove</td>
-        </tr>
-    </thead>
-    <tbody>
-        {#each data.utenti as utente}
+    <table>
+        <thead>
             <tr>
-                <td>{utente.id}</td>
-                <td>{utente.nome}</td>
-                <td>{utente.cognome}</td>
-                <td>{utente.eta}</td>
-                <td>
-                    <button class="edit">Edit</button>
-                </td>
-                <td>
-                    <button class="remove">Remove</button>
-                </td>
+                <td>ID</td>
+                <td>Nome</td>
+                <td>Cognome</td>
+                <td>Eta</td>
+                <td>Edit</td>
+                <td>Remove</td>
             </tr>
-        {/each}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {#each data.utenti as utente}
+                <tr>
+                    <td>{utente.id}</td>
+                    <td>{utente.nome}</td>
+                    <td>{utente.cognome}</td>
+                    <td>{utente.eta}</td>
+                    <td>
+                        <button class="edit" on:click={() => edit_user(utente)}>Edit</button>
+                    </td>
+                    <td>
+                        <button class="remove">Remove</button>
+                    </td>
+                </tr>
+            {/each}
+        </tbody>
+    </table>
+</div>
 
 <style>
     .container {
