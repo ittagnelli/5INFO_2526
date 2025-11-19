@@ -70,5 +70,14 @@ export const actions = {
                 form_vals: user
             }
         }
+    },
+    delete: async ({cookies, request}) => {
+        const data = await request.formData();
+        console.log("DELETE ACTION");
+        console.log("I VALORI DEL FORM SONO:", data);
+
+        const query4 = db.prepare('DELETE FROM Utente WHERE id = ?');
+
+        const res4 = query4.run(+data.get("id"));
     }
 }
