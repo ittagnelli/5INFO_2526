@@ -25,7 +25,6 @@ console.log(res);
 console.log(res2)
 console.log(info6);
 
-
 // const info4 = query4.run[
 //   { id: 1, nome: 'Mario', cognome: 'Rossi', eta: 18 },
 //   { id: 2, nome: 'Giuseppe', cognome: 'Verdi', eta: 17 },
@@ -39,7 +38,7 @@ console.log(info6);
 // const query = db.prepare('SELECT * FROM Utente');
 // 
 // const results = query.all();
-// 
+//
 // console.table(results);
 // 
 // db.close();
