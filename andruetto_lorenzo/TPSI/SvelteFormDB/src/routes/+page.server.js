@@ -1,5 +1,4 @@
-import Database from 'better-sqlite3';
-
+import Database from 'better-sqlite3' 
 const db = new Database("USER.db", { verbose: console.log });
 
 export function load({ params }) {
@@ -14,7 +13,7 @@ export function load({ params }) {
 };
 
 export const actions = {
-    create: async ({cookies, request}) => {
+    create: async ({ cookies, request }) => {
         const data = await request.formData();
         console.log("CREATE ACTION");
         console.log("I VALORI DEL FORM SONO:", data);
@@ -76,6 +75,7 @@ export const actions = {
         const data = await request.formData();
         console.log("DELETE ACTION");
         console.log("I VALORI DEL FORM SONO:", data);
+        
         
         const query4 = db.prepare(
             "DELETE FROM Utente WHERE id = ?"

@@ -17,6 +17,7 @@
 		"vite": "^7.1.7"
 	},
 	"dependencies": {
-		"better-sqlite3": "^11.10.0"
+		"better-sqlite3": "^11.10.0",
+		"svelte-confirm": "^0.0.0"
 	}
 }
