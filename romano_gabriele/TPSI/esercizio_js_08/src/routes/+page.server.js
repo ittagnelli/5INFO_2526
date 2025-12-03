@@ -6,6 +6,8 @@ import Database from 'better-sqlite3';
 
 const db = new Database('TASK.db');
 
+let tasklist = [];
+
 export const actions = {
     create: async({cookies, request}) => {
         const data = await request.formData();
