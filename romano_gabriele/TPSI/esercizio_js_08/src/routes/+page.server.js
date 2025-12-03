@@ -6,33 +6,6 @@ import Database from 'better-sqlite3';
 
 const db = new Database('TASK.db');
 
-let tasklist = [
-    {
-        id: 0,
-        todo: "mangiare",
-        priority: "bassa",
-        status: false
-    },
-    {
-        id: 1,
-        todo: "programmare",
-        priority: "bassa",
-        status: false
-    },
-    {
-        id: 2,
-        todo: "spesa",
-        priority: "media",
-        status: false
-    },
-    {
-        id: 3,
-        todo: "fortnite",
-        priority: "alta",
-        status: false
-    }
-];
-
 export const actions = {
     create: async({cookies, request}) => {
         const data = await request.formData();
@@ -115,36 +88,3 @@ export function load({ params }) {
         tasklist: queryAll
     };
 }
-
-
-
-
-
-
-
-
-
-
-// //SELECT
-// const query2 = db.prepare('SELECT * FROM Utente WHERE eta = ?');
-
-// const query3 = db.prepare('SELECT * FROM Utente WHERE eta = @anni');
-
-// const res = query1.all();
-// console.log(res);
-
-
-// //INSERT
-// const query4 = db.prepare('INSERT INTO Utente (nome, cognome, eta) VALUES(?, ?, ?)');
-// const info4 = query4.run('Mirko', 'Bianchi', 25);
-// console.log(info4);
-
-// //UPDATE
-// const query5 = db.prepare('UPDATE Utente SET nome=@nome WHERE id=@id');
-// const info5 = query5.run({ id: 5, nome: 'Mirco'});
-// console.log(info5);
-
-// //DELETE
-// const query6 = db.prepare('DELETE FROM Utente WHERE id= ?');
-// const info6 = query6.run(5);
-// console.log(info6);
