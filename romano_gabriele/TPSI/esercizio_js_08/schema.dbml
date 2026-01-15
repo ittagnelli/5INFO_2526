@@ -1,0 +1,6 @@
+Table Task {
+    id        integer [pk, increment]
+    todo      varchar
+    priority  varchar
+    status    bool
+}

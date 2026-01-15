@@ -1,0 +1,7 @@
+Table Contatto {
+    id          integer [pk, increment]
+    cognome     varchar
+    nome        varchar
+    indirizzo   varchar
+    telefono    integer
+}
