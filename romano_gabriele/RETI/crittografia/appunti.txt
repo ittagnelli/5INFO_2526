@@ -1,0 +1,4 @@
+cifrato con pubblica decifrato con privata --> confidenzialità
+cifrato con privata decifrato con pubblica --> garanzia che sia stato generato da lui
+
+cifro con la mia privata e poi con la sua pubblica --> confidenzialità e integrità
